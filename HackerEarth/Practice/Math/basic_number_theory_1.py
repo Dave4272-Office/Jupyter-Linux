@@ -5,10 +5,16 @@ Modular arithmetic:
     Properties:
         1) (a + b) % M = (a % M + b % M) % M
         2) (a * b) % M = ((a % M) * (b % M)) % M
-        3) (a * b) % M = ((a % M) * (b % M) + M) % M
+        3) (a - b) % M = ((a % M) - (b % M) + M) % M
         4) (a / b) % M = ((a % M) * (b⁻¹ % M)) % M
             b⁻¹ => Modulo Multiplicative Inverse of b.
+
+Modulo Multiplicative Inverse:
+    (b * b⁻¹) % M = 1 % M
+        b⁻¹ => Modulo Multiplicative Inverse of b.
 """
+
+
 def extended_gcd(a: int, b: int) -> dict:
     """
     Calculates gcd using Euler's method and also the Bezout coefficients.
@@ -30,7 +36,7 @@ def extended_gcd(a: int, b: int) -> dict:
     return {"gcd": ext_gcd["gcd"], "x": x, "y": y}
 
 
-def euler_modulo_multiplicative_inverse(a: int, m: int) -> int:
+def euler_mod_multiplicative_inverse(a: int, m: int) -> int:
     """
     Calculates Modular Multiplicative Inverse using Euler's method to calculate extended gcd
     MMI = ((Bezout coefficient x of extended gcd(a,M))%M + M)%M
@@ -40,7 +46,7 @@ def euler_modulo_multiplicative_inverse(a: int, m: int) -> int:
     return ((ext_gcd["x"] % m) + m) % m
 
 
-def fast_power(a: int, e: int, m: int) -> int:
+def fast_power_mod(a: int, e: int, m: int) -> int:
     """
     Calculates (a^e)%M.
 
@@ -51,7 +57,7 @@ def fast_power(a: int, e: int, m: int) -> int:
     2) else:
         a) a^e = a*a^(e-1); e-1 becomes even;
         b) (e-1) / 2 => e // 2;
-        c) (a^e)%M = (a*a^(e-1))%M = ((a%M)*((a^(e-1))%M))%M 
+        c) (a^e)%M = (a*a^(e-1))%M = ((a%M)*((a^(e-1))%M))%M
             = ((a%M)*((((a^2)%M)^((e-1)/2))%M))%M = ((a%M)*((((a^2)%M)^(e//2))%M))%M
     """
     if e == 0:
@@ -59,15 +65,15 @@ def fast_power(a: int, e: int, m: int) -> int:
     elif e == 1:
         return a % m
     elif e % 2 == 0:
-        return fast_power(((a * a) % m), e // 2, m)
+        return fast_power_mod(((a * a) % m), e // 2, m)
     else:
-        return ((a % m) * fast_power(((a * a) % m), e // 2, m)) % m
+        return ((a % m) * fast_power_mod(((a * a) % m), e // 2, m)) % m
 
 
 inp = input()
 inp = inp.split()
 A, B, C, M = int(inp[0]), int(inp[1]), int(inp[2]), int(inp[3])
 answer = (
-    fast_power(A, B, M) * euler_modulo_multiplicative_inverse(C, M)
+    fast_power_mod(A, B, M) * euler_mod_multiplicative_inverse(C, M)
 ) % M  # answer = ((A^B)/C)mod M
 print(answer)

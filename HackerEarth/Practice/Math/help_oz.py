@@ -1,6 +1,7 @@
 """
 https://www.hackerearth.com/problem/algorithm/a-simple-task/?source=list_view
 """
+
 from functools import reduce
 from math import sqrt
 

@@ -2,6 +2,7 @@
 https://www.hackerearth.com/practice/math/number-theory/basic-number-theory-1/tutorial/
 https://www.hackerearth.com/problem/algorithm/riyas-birthday-party-1/?source=list_view
 """
+
 # a(1) = 1; a(2) = 6;
 # sequence not in AP or GP
 # 1 6 15 28 45 ...

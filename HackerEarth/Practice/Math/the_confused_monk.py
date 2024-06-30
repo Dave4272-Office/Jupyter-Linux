@@ -2,6 +2,8 @@
 https://www.hackerearth.com/practice/math/number-theory/basic-number-theory-1/tutorial/
 https://www.hackerearth.com/problem/algorithm/the-confused-monk/?source=list_view
 """
+
+
 def euler_gcd(a: int, b: int) -> int:
     """
     Euler's Method to calculate gcd
@@ -14,7 +16,7 @@ def euler_gcd(a: int, b: int) -> int:
     return euler_gcd(b, a % b)
 
 
-def fast_power(a: int, e: int, m: int) -> int:
+def fast_power_mod(a: int, e: int, m: int) -> int:
     """
     Calculates (a^e)%M.
 
@@ -25,7 +27,7 @@ def fast_power(a: int, e: int, m: int) -> int:
     2) else:
         a) a^e = a*a^(e-1); e-1 becomes even;
         b) (e-1) / 2 => e // 2;
-        c) (a^e)%M = (a*a^(e-1))%M = ((a%M)*((a^(e-1))%M))%M 
+        c) (a^e)%M = (a*a^(e-1))%M = ((a%M)*((a^(e-1))%M))%M
             = ((a%M)*((((a^2)%M)^((e-1)/2))%M))%M = ((a%M)*((((a^2)%M)^(e//2))%M))%M
     """
     if e == 0:
@@ -33,9 +35,9 @@ def fast_power(a: int, e: int, m: int) -> int:
     elif e == 1:
         return a % m
     elif e % 2 == 0:
-        return fast_power(((a * a) % m), e // 2, m)
+        return fast_power_mod(((a * a) % m), e // 2, m)
     else:
-        return (a * fast_power(((a * a) % m), e // 2, m)) % m
+        return (a * fast_power_mod(((a * a) % m), e // 2, m)) % m
 
 
 def euler_gcd_list(list_num: list[int]) -> int:
@@ -50,11 +52,11 @@ def euler_gcd_list(list_num: list[int]) -> int:
         return euler_gcd(list_num[0], euler_gcd_list(list_num[1:]))
 
 
-def fast_power_list(list_num: list[int], e: int, m: int) -> list[int]:
+def fast_power_mod_list(list_num: list[int], e: int, m: int) -> list[int]:
     """
     Returns the fast power of a list of numbers to the power of e
     """
-    return [fast_power(x, e, m) for x in list_num]
+    return [fast_power_mod(x, e, m) for x in list_num]
 
 
 def mod_multiplication(a: int, b: int, m: int) -> int:
@@ -85,5 +87,5 @@ A = input()
 A = [int(x) for x in A.split()]
 gx = euler_gcd_list(A)  # gx = gcd(list of num);
 # answer = (fx^gx) mod M; fx = multiplication of list of numbers
-answer = mod_multiplication_list(fast_power_list(A, gx, M), M)
+answer = mod_multiplication_list(fast_power_mod_list(A, gx, M), M)
 print(answer)

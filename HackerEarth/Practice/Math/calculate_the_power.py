@@ -2,7 +2,9 @@
 https://www.hackerearth.com/practice/math/number-theory/basic-number-theory-1/tutorial/
 https://www.hackerearth.com/problem/algorithm/calculate-the-power/?source=list_view
 """
-def fast_power(a: int, e: int, m: int) -> int:
+
+
+def fast_power_mod(a: int, e: int, m: int) -> int:
     """
     Calculates (a^e)%M.
 
@@ -13,7 +15,7 @@ def fast_power(a: int, e: int, m: int) -> int:
     2) else:
         a) a^e = a*a^(e-1); e-1 becomes even;
         b) (e-1) / 2 => e // 2;
-        c) (a^e)%M = (a*a^(e-1))%M = ((a%M)*((a^(e-1))%M))%M 
+        c) (a^e)%M = (a*a^(e-1))%M = ((a%M)*((a^(e-1))%M))%M
             = ((a%M)*((((a^2)%M)^((e-1)/2))%M))%M = ((a%M)*((((a^2)%M)^(e//2))%M))%M
     """
     if e == 0:
@@ -21,9 +23,9 @@ def fast_power(a: int, e: int, m: int) -> int:
     elif e == 1:
         return a % m
     elif e % 2 == 0:
-        return fast_power(((a * a) % m), e // 2, m)
+        return fast_power_mod(((a * a) % m), e // 2, m)
     else:
-        return (a * fast_power(((a * a) % m), e // 2, m)) % m
+        return (a * fast_power_mod(((a * a) % m), e // 2, m)) % m
 
 
 M = 1000000007  # 10^9 + 7
@@ -31,5 +33,5 @@ inp = input()
 inp = [int(x) for x in inp.split()]
 A = inp[0]
 B = inp[1]
-answer = fast_power(A, B, M)
+answer = fast_power_mod(A, B, M)
 print(answer)

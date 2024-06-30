@@ -2,6 +2,8 @@
 https://www.hackerearth.com/practice/math/number-theory/basic-number-theory-1/tutorial/
 https://www.hackerearth.com/problem/algorithm/panda-and-chain-reaction/?source=list_view
 """
+
+
 def mod_multiplication(a: int, b: int, m: int) -> int:
     """
     Mod Multiplication
