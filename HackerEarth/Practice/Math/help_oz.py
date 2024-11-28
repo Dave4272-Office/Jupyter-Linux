@@ -45,10 +45,10 @@ def all_factors(list_nums: list[int]) -> set[int]:
     """
     Find all factors of a list of numbers.
     """
-    factors = set()
+    factor_set = set()
     for i in list_nums:
-        factors = factors.union(factors(i))
-    return factors
+        factor_set = factor_set.union(factors(i))
+    return factor_set
 
 
 M = 1000000007  # 10^9 + 7
@@ -57,10 +57,10 @@ A = [int(input()) for _ in range(N)]
 succDiff = successive_difference(A)
 print(succDiff)
 
-factors = all_factors(succDiff)
+factorList = all_factors(succDiff)
 
 req = []
-for factor in factors:
+for factor in factorList:
     if factor == 1:
         continue
     sumStore = []

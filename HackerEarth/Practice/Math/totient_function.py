@@ -22,7 +22,7 @@ class FactorSieve(object):
         self.max = 1
 
 
-def sieve_of_eratosthenes(n: int, m: int, sieve: FactorSieve) -> None:
+def sieve_of_eratosthenes(n: int, sieve: FactorSieve) -> None:
     """
     Sieve of Eratosthenes both prime and factor
     """
@@ -46,7 +46,7 @@ def factorize(
     Calculates the sieve using the given method and returns the prime factors of given number
     """
     if n > sieve.max and n < m:
-        sieve_of_eratosthenes(n, m, sieve)
+        sieve_of_eratosthenes(n, sieve)
     factors: list[int] = []
     x = abs(n)
     while x != 1:
